@@ -1,0 +1,54 @@
+{% extends 'core.html' %}
+
+{% block title %}CRUD{% endblock title %}
+{% block top %}
+<div class="container">
+<h3 class="text-center bg-success p-3 mt-1 text-white">Django CRUD (Create, Retrieve, Update, Delete) Function Based Views</h5>
+<div class="row">
+<div class="col-md-5">
+<h3 class="bg-info p-2 text-center mt-3">Student Form</h3>
+<form action="" method="post" novalidate enctype="multipart/form-data">
+{% csrf_token %}
+
+{% comment %} Full Name {% endcomment %}
+<h5>{{form.full_name.label}}</h5>
+{{form.full_name}}
+<small class="text-muted">{{form.full_name.help_text}}</small><br>
+<span id = "full_name_error" class="fst-italic text-danger">{{form.full_name.errors|striptags}}</span>
+<br>
+
+
+{% comment %} Address {% endcomment %}
+<h5>{{form.address.label}}</h5>
+{{form.address}}
+<span id="address_error" class="fst-italic text-danger">{{form.address.errors|striptags}}</span>
+
+{% comment %} Phone Number {% endcomment %}
+<h5>{{form.phone_number.label}}</h5>
+{{form.phone_number}}
+<small class="text-muted">{{form.phone_number.help_text}}</small><br>
+<span id="phone_number_error" class="fst-italic text-danger">{{form.phone_number.errors|striptags}}</span>
+
+{% comment %} Choice {% endcomment %}
+<h5>{{form.field.label}}</h5>
+{{form.field}}
+
+{% comment %} Picture {% endcomment %}
+
+<h5>{{form.picture.label}}</h5>
+{{form.picture}} <br>
+<span id="picture_error" class="fst-italic text-danger">{{form.picture.errors|striptags}}</span>
+
+<br>
+
+<input class="btn btn-success mt-3" type="submit" value="Save">
+</form>
+{% for er in form.non_field_errors  %}
+{{er}}
+{% endfor %}
+</div>
+</div>
+</div>
+
+{% endblock top %}
+

@@ -5,3 +5,9 @@ Django is a Python-based web framework which allows you to quickly create web ap
 * Retrieve – read, retrieve, search, or view existing entries as a list(List View) or retrieve a particular entry in detail (Detail View) 
 * Update – update or edit existing entries in a table in the database 
 * Delete – delete, deactivate, or remove existing entries in a table in the database
+
+## Technology Used
+![image](https://user-images.githubusercontent.com/67781881/125473616-f60296e2-ebb9-4aaf-aff1-9b66563efd80.png)
+![image](https://user-images.githubusercontent.com/67781881/125473748-89bbbd20-08cd-4505-8bb7-74687cf18c78.png)
+![image](https://user-images.githubusercontent.com/67781881/125473802-32cacf8a-78b8-4991-bec3-90805e767063.png)
+

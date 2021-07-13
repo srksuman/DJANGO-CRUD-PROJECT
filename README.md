@@ -1,0 +1,1 @@
+# Simple Django CRUD Project

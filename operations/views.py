@@ -15,7 +15,9 @@ def save_form(request):
     if request.is_ajax():
         if form.is_valid():
             form.save()
-            return JsonResponse({'process':'done'})
+            all_data = Student.objects.values()
+            print(all_data)
+            return JsonResponse({'process':'done','all_data':list(all_data)})
         else:
             error_list = form.errors.as_data()
             error_list_name = []
@@ -29,3 +31,14 @@ def save_form(request):
             return JsonResponse({'error_name':error_list_name,'error_value':error_list_value})
     else:
         return JsonResponse({'process':'error'})
+
+
+def delete_data(request):
+    if request.method == 'GET':
+        id = int(request.GET.get('id'))
+        dt = Student.objects.get(id=id)
+        dt.delete()
+        return JsonResponse({"result":"success"})
+    else:
+        return JsonResponse({"result":"failed"})
+        

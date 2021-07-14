@@ -8,172 +8,31 @@
 <div class="col-md-5">
 <h3 class="bg-info p-2 text-center mt-3">Student Form</h3>
 <div id="data-success"></div>
-<form id="form_data" action="" method="post" novalidate enctype="multipart/form-data">
-{% csrf_token %}
-
-{% comment %} Full Name {% endcomment %}
-<h5>{{form.full_name.label}}</h5>
-{{form.full_name}}
-<small class="text-muted">{{form.full_name.help_text}}</small><br>
-<span id = "full_name_error" class="fst-italic text-danger">{{form.full_name.errors|striptags}}</span>
-<br>
-
-
-{% comment %} Address {% endcomment %}
-<h5>{{form.address.label}}</h5>
-{{form.address}}
-<span id="address_error" class="fst-italic text-danger">{{form.address.errors|striptags}}</span>
-
-{% comment %} Phone Number {% endcomment %}
-<h5>{{form.phone_number.label}}</h5>
-{{form.phone_number}}
-<small class="text-muted">{{form.phone_number.help_text}}</small><br>
-<span id="phone_number_error" class="fst-italic text-danger">{{form.phone_number.errors|striptags}}</span>
-
-{% comment %} Choice {% endcomment %}
-<h5>{{form.field.label}}</h5>
-{{form.field}}
-
-{% comment %} Picture {% endcomment %}
-
-<h5>{{form.picture.label}}</h5>
-{{form.picture}} <br>
-<span id="picture_error" class="fst-italic text-danger">{{form.picture.errors|striptags}}</span>
-
-<br>
-<div id="show_img"></div>
-<input class="btn btn-success mt-3" id="save" type="submit" value="Save">
-</form>
-
+{% include 'html/show_form.html' %}
 {% for er in form.non_field_errors  %}
 {{er}}
 {% endfor %}
 </div>
+
+
 <div class="col-7">
 <h3 class="bg-info p-2 text-center mt-3">Student Details</h3>
 <div class="overflow-scroll" style="height:500px;width:100%">
-<table class="table table-hover table-dark">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Full Name</th>
-      <th scope="col">Address</th>
-      <th scope="col">Number</th>
-      <th scope="col">Field</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for data in student %}
-    <tr>
-      <th scope="row">{{data.id}}</th>
-      <td>{{data.full_name}}</td>
-      <td>{{data.address}}</td>
-      <td>{{data.phone_number}}</td>
-      <td>{{data.field}}</td>
-      <td>
-        <input class="btn-sm btn-info text-white " type="button" data-sid ="{{st.id}}" value="Edit">
-        <input class="btn-sm btn-danger text-white" type="button" data-sid ="{{st.id}}" value="Delete">
-      </td>
-    </tr>
-{% endfor %}
-  </tbody>
-</table>
-</div>
-</div>
+{% include 'html/table.html' %}
 </div>
 </div>
 
+
+
+</div>
+</div>
 {% endblock top %}
 
 
 {% comment %} JavaScript Block {% endcomment %}
 {% block js %}
 
-$(document).ready(function(){
-const img  = document.getElementById('id_picture')
-var url =""
-img.addEventListener('change',()=>{
-    url = URL.createObjectURL(img.files[0])
-    document.getElementById('show_img').innerHTML = `<img  src="${url}" width= 100>`
-    console.log(url)
-})
-
-
-$('#save').click('submit',e=>{
-    e.preventDefault();
-    data = {}
-    var form_data = $('form').serializeArray()
-    
-    $.each(form_data,(index,value)=>{
-        data[value['name']] = value['value']
-    })
-    console.log(data)
-    console.log()
-    const df = new FormData();
-    df.append('csrfmiddlewaretoken',data['csrfmiddlewaretoken'])
-    df.append('address',data['address'])
-    df.append('field',data['field'])
-    df.append('full_name',data['full_name'])
-    df.append('phone_number',data['phone_number'])
-    df.append('picture',img.files[0])
-
-    $.ajax({
-        type:'POST',
-        url: {% url 'save' %},
-        enctype: 'multipart/form',
-        data:df,
-        success:function(data){
-            var error_list_data = {}
-            console.log(data.error_name)
-            $.each(data.error_name,(k,v)=>{
-                error_list_data[v] = data.error_value[k]
-            })
-
-            if (error_list_data['full_name']){
-                $('#full_name_error').html(error_list_data['full_name'])
-            }else{
-                $('#full_name_error').html('')
-
-            }
-
-            if (error_list_data['address']){
-                $('#address_error').html(error_list_data['address'])
-            }else{
-                $('#address_error').html('')
-            }
-
-            if (error_list_data['phone_number']){
-                $('#phone_number_error').html(error_list_data['phone_number'])
-            }else{
-                $('#phone_number_error').html('')
-            }
-
-            if (error_list_data['picture']){
-                $('#picture_error').html(error_list_data['picture'])
-            }else{
-                $('#picture_error').html('')
-            }
-            if (data.process == 'done'){
-                var txt = `<div class="alert alert-info alert-dismissible fade show" role="alert">
-                Student Data is saved successfully!!</div>`
-                $('#data-success').delay(5000).fadeOut('slow');
-                $('#data-success').append(txt)
-                $('#form_data')[0].reset();
-                $('#show_img').html('')
-            }     
-            
-        },
-        error:function(error){
-            console.log("error")
-        },
-        cache:false,
-        contentType: false,
-        processData:false
-    })
-})
-
-})
+{% include 'html/ajax_.html' %}
 
  {% endblock js %}
 

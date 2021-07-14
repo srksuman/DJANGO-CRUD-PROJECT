@@ -4,7 +4,6 @@ from django import forms
 # Create your models here.
 class Student(models.Model):
     def checknumber(value):
-        print(len(str(value)))
         if len(str(value)) !=10:
             raise forms.ValidationError("Entered incorrect mobile number")
         

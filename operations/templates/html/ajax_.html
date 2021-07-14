@@ -25,6 +25,7 @@ $('#save').click('submit',e=>{
     df.append('full_name',data['full_name'])
     df.append('phone_number',data['phone_number'])
     df.append('picture',img.files[0])
+    df.append('student_id',$('#student_id').val())
 
     $.ajax({
         type:'POST',
@@ -85,6 +86,8 @@ $('#save').click('submit',e=>{
                 </tr>`
                 }
                 $('#table_body').html(output)
+                {% comment %} clearning the student_id {% endcomment %}
+                $('#student_id').val("")
             }     
             
         },
@@ -98,7 +101,7 @@ $('#save').click('submit',e=>{
 })
 
 
-{% comment %} Deleting data {% endcomment %}
+{% comment %} Deleting Student Record {% endcomment %}
 $("tbody").on("click",".del-btn",function(){
     console.log("clicked")
     click = this;
@@ -132,8 +135,43 @@ $("tbody").on("click",".del-btn",function(){
     })
 })
 
-{% comment %} edit student data {% endcomment %}
+{% comment %} Edit Student Record {% endcomment %}
+$("tbody").on("click",".edit-btn",function(){
+    console.log("clicked")
+    click = this;
+    var id = $(click).attr("data-sid");
+    console.log(id)
+    var csrf = $("input[name=csrfmiddlewaretoken]").val()
+    console.log(csrf)
+    data = {id:id,csrfmiddlewaretoken:csrf}
+    $.ajax({
+        method:"POST",
+        url: {% url 'edit' %},
+        data: data,
+        success:(data)=>{
+            console.log(data)
+            if (data.result == 1){
+                console.log(data.full_name)
+                console.log(data.img)
+                var src = "media/"+data.img
+                console.log(src)
+                var img = `<img src=${src} width=100>`
+                $("#show_img").html(img)
+                $("#id_full_name").val(data.full_name);
+                $("#id_address").val(data.address);
+                $("#id_phone_number").val(data.phone_number);
+                $("#id_field").val(data.field);
+                $("#student_id").val(data.id)
 
+            }else{
+          
+
+            }
+            
+        },
+
+    })
+})
 
 
 })

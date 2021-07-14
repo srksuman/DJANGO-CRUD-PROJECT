@@ -1,6 +1,6 @@
 <form id="form_data" action="" method="post" novalidate enctype="multipart/form-data">
 {% csrf_token %}
-
+<input type="hidden" id="student_id" name="student_id" value="">
 {% comment %} Full Name {% endcomment %}
 <h5>{{form.full_name.label}}</h5>
 {{form.full_name}}

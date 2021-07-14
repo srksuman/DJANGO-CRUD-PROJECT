@@ -14,7 +14,12 @@ def save_form(request):
     form = StudentForm(request.POST or None,request.FILES or None)
     if request.is_ajax():
         if form.is_valid():
-            form.save()
+            sid = request.POST.get('student_id')
+            if (sid==""):
+                std_id = Student(full_name= request.POST['full_name'],address = request.POST['address'],phone_number = request.POST['phone_number'],field= request.POST['field'],picture= request.FILES['picture'])
+            else:
+                std_id = Student(id =int(sid),full_name= request.POST['full_name'],address = request.POST['address'],phone_number = request.POST['phone_number'],field= request.POST['field'],picture= request.FILES['picture'])
+            std_id.save()
             all_data = Student.objects.values()
             print(all_data)
             return JsonResponse({'process':'done','all_data':list(all_data)})
@@ -42,3 +47,19 @@ def delete_data(request):
     else:
         return JsonResponse({"result":"failed"})
         
+
+def edit_data(request):
+    if request.method == "POST":
+        print("suman")
+        print(request.POST.get('id'))
+        dt = Student.objects.get(id=int(request.POST.get('id')))
+        full_name = dt.full_name
+        address = dt.address
+        phone_number = dt.phone_number
+        field = dt.field
+        img = dt.picture
+        id = dt.id
+        print(img)
+        return JsonResponse({'result':1,'full_name':full_name,'address':address,'phone_number':phone_number,'field':field,'img':str(img),'id':id})
+    else:
+        return JsonResponse({"result":0})

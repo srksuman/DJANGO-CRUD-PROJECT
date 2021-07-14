@@ -6,6 +6,21 @@ Django is a Python-based web framework which allows you to quickly create web ap
 * Update – update or edit existing entries in a table in the database 
 * Delete – delete, deactivate, or remove existing entries in a table in the database
 
+# Demo
+![demo_crud_gif](https://user-images.githubusercontent.com/67781881/125621374-267ea588-24d7-478f-9b77-aea3c0fa396c.gif)
+## What is AJAX?
+AJAX = Asynchronous JavaScript And XML.
+
+AJAX is not a programming language.
+
+AJAX just uses a combination of:
+
+A browser built-in XMLHttpRequest object (to request data from a web server)
+JavaScript and HTML DOM (to display or use the data)
+
+## What is jQuery and why it is used?
+
+jQuery is a lightweight, "write less, do more", JavaScript library. The purpose of jQuery is to make it much easier to use JavaScript on your website. jQuery takes a lot of common tasks that require many lines of JavaScript code to accomplish, and wraps them into methods that you can call with a single line of code.
 ## Technology Used
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/67781881/125477176-dd6f6456-9c46-46e7-81d8-e13777c1746d.gif)
 

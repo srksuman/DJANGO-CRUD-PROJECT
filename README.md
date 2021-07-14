@@ -22,6 +22,7 @@ JavaScript and HTML DOM (to display or use the data)
 
 jQuery is a lightweight, "write less, do more", JavaScript library. The purpose of jQuery is to make it much easier to use JavaScript on your website. jQuery takes a lot of common tasks that require many lines of JavaScript code to accomplish, and wraps them into methods that you can call with a single line of code.
 ## Technology Used
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/67781881/125477176-dd6f6456-9c46-46e7-81d8-e13777c1746d.gif)
+![tech](https://user-images.githubusercontent.com/67781881/125622234-e49e7776-8de0-4522-a61f-306710fa1d5d.gif)
+
 
 
